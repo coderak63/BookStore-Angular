@@ -12,4 +12,8 @@ export class AddNewBookComponent implements OnInit {
   ngOnInit() {
   }
 
+  addBook(){
+    
+  }
+
 }

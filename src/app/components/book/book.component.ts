@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Book } from 'src/app/model/Book';
+import { HttpService } from 'src/app/services/http.service';
+import { ModalDirective } from 'angular-bootstrap-md';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -7,9 +11,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('frame') public popup_frame: ModalDirective;
+
+  @Input() book:Book;
+  @Output() deleteEvent:EventEmitter<Book> = new EventEmitter();
+  //@Output() updateEvent:EventEmitter<Book> = new EventEmitter();
+
+  
+
+  constructor(private httpService:HttpService, private router:Router) { }
 
   ngOnInit() {
+  }
+
+  openBookDetails(){
+    this.router.navigate(['/books/'+this.book.id], {state: {data: this.book}});
+  }
+
+  emitForDelete(book:Book){
+    if(confirm("Click OK to delete")){
+      console.log("emitForDelete is called.");
+      console.log(book);
+      this.deleteEvent.emit(book);
+    }
+    
+  }
+
+  
+
+  
+
+  updateBook(title,description,due_date,frame){
+
+      /*
+    this.book.title=title.value;
+    this.todo.description=description.value;
+    this.todo.date_due=due_date.value;
+    */
+
+    this.httpService.editBook(this.book).subscribe(
+      (data) => {
+        console.log(data);
+        frame.hide();
+      },
+
+      (error) => {
+        console.log(error);
+        frame.hide();
+        alert("Some error occured");
+      }
+    )
   }
 
 }

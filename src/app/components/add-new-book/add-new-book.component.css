@@ -1,0 +1,15 @@
+label {
+    display: inline-block;
+    margin-right: 25px;
+    text-align: right;
+    max-width: 100%;
+    font-weight: 700;
+}
+
+.input-box{
+    display: inline-block;
+}
+
+.form-group{
+    margin: 20px;
+}
