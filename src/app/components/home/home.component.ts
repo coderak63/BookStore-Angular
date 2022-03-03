@@ -39,6 +39,12 @@ export class HomeComponent implements OnInit {
     this.httpService.deleteBook(book).subscribe(
       data => {    
           console.log(data);
+          
+          // delete from local data array
+          const index = this.allBooks.indexOf(book,0);
+          if (index > -1) {
+            this.allBooks.splice(index, 1);
+          }
       },
 
       error => {

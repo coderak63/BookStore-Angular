@@ -4,6 +4,7 @@ export class Book{
     title:string;
 	description:string;
 	authors:Array<string>;
+	//authors:any;
 	isbn:string;
 	publisher:string;
 	language:string;
@@ -11,5 +12,7 @@ export class Book{
 	category:string;
 	page_count:number;
     date_created:string;
+
+	constructor() { }
     
 }

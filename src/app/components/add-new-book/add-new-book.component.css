@@ -8,8 +8,15 @@ label {
 
 .input-box{
     display: inline-block;
+    
 }
 
 .form-group{
     margin: 20px;
 }
+
+#submit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

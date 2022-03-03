@@ -9,12 +9,18 @@ export class HttpService {
 
   constructor(private httpClient:HttpClient) { }
 
+  
+
+  fetchAllBooks() {
+    return this.httpClient.get<Book[]>('/api/books');
+  }
+
   getBookById(id: string) {
     return this.httpClient.get<Book>('/api/books/'+id);
   }
 
-  fetchAllBooks() {
-    return this.httpClient.get<Book[]>('/api/books');
+  addBook(book: Book){
+    return this.httpClient.post<Book>('/api/add-book',book);
   }
 
   editBook(book: Book) {

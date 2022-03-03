@@ -1,6 +1,6 @@
 
-
-<form class="form-horizontal">
+<div class="container-fluid">
+<form #myForm="ngForm" class="form-horizontal" (submit)="addBook()" ngNativeValidate>
 <fieldset>
 
 <!-- Form Name -->
@@ -11,20 +11,22 @@
 </legend>
 
 
+
+
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
+  <label class="col-md-4 control-label" for="book_title">BOOK TITLE</label>  
   <div class="col-md-4 input-box">
-  <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+  <input id="book_title" name="title" class="form-control input-md" [(ngModel)]="this.book.title" required="" type="text">
     
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+  <label class="col-md-4 control-label" for="book_description">DESCRIPTION</label>
   <div class="col-md-4 input-box">                     
-    <textarea class="form-control" id="product_description" name="product_description"></textarea>
+    <textarea class="form-control" id="book_description" [(ngModel)]="this.book.description" name="description" required></textarea>
   </div>
 </div>
 
@@ -32,21 +34,26 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <label class="col-md-4 control-label" style="padding-top:0px" for="book_category">CATEGORY</label>
   <div class="col-md-4 input-box">
-    <select id="product_categorie" name="product_categorie" class="form-control">
+    <select id="book_category" name="category" class="form-control" [(ngModel)]="this.book.category" required>
+      <option *ngFor="let x of this.categories">{{x}}</option>
+      <option>Other</option>
     </select>
+
+    <input *ngIf="this.book.category=='Other'" [(ngModel)]="this.category_other" id="product_category_other" name="category_other" class="form-control input-md" required="" type="text" style="margin-top: 10px;">
   </div>
+  
 </div>
 
 
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_weight">PRODUCT WEIGHT</label>  
+  <label class="col-md-4 control-label" for="book_authors">AUTHORS</label>  
   <div class="col-md-4 input-box">
-  <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text">
-    
+  <input id="book_authors" name="authors" [(ngModel)]="this.authors" class="form-control input-md" required="" type="text">
+    <span style="color:red;">(Separate with comma if more than one author)</span>
   </div>
 </div>
 
@@ -55,115 +62,66 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="percentage_discount">PERCENTAGE DISCOUNT</label>  
+  <label class="col-md-4 control-label" for="book_isbn">ISBN</label>  
   <div class="col-md-4 input-box">
-  <input id="percentage_discount" name="percentage_discount" placeholder="PERCENTAGE DISCOUNT" class="form-control input-md" required="" type="text">
+  <input id="book_isbn" name="isbn" [(ngModel)]="this.book.isbn" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="stock_alert">STOCK ALERT</label>  
+  <label class="col-md-4 control-label" for="book_publisher">PUBLISHER</label>  
   <div class="col-md-4 input-box">
-  <input id="stock_alert" name="stock_alert" placeholder="STOCK ALERT" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Search input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="stock_critical">STOCK CRITICAL</label>
-  <div class="col-md-4 input-box">
-    <input id="stock_critical" name="stock_critical" placeholder="STOCK CRITICAL" class="form-control input-md" required="" type="search">
-    
-  </div>
-</div>
-
-<!-- Search input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="tutorial">TUTORIAL</label>
-  <div class="col-md-4 input-box">
-    <input id="tutorial" name="tutorial" placeholder="TUTORIAL" class="form-control input-md" required="" type="search">
-    
-  </div>
-</div>
-
-<!-- Search input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="tutorial_fr">TUTORIAL FR</label>
-  <div class="col-md-4 input-box">
-    <input id="tutorial_fr" name="tutorial_fr" placeholder="TUTORIAL FR" class="form-control input-md" required="" type="search">
+  <input id="book_publisher" name="publisher" [(ngModel)]="this.book.publisher" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="online_date">ONLINE DATE</label>  
+  <label class="col-md-4 control-label" for="book_price">PRICE</label>  
   <div class="col-md-4 input-box">
-  <input id="online_date" name="online_date" placeholder="ONLINE DATE" class="form-control input-md" required="" type="text">
+  <input id="book_price" name="price" [(ngModel)]="this.book.price" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="author">AUTHOR</label>  
+  <label class="col-md-4 control-label" for="book_page_count">PAGE COUNT</label>  
   <div class="col-md-4 input-box">
-  <input id="author" name="author" placeholder="AUTHOR" class="form-control input-md" required="" type="text">
+  <input id="book_page_count" name="page_count" [(ngModel)]="this.book.page_count" class="form-control input-md" required="" type="number" min="0" value="0">
     
   </div>
 </div>
 
-<!-- Text input-->
+
+<!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="enable_display">ENABLE DISPLAY</label>  
+  <label class="col-md-4 control-label" style="padding-top:0px" for="book_language">LANGUAGE</label>
   <div class="col-md-4 input-box">
-  <input id="enable_display" name="enable_display" placeholder="ENABLE DISPLAY" class="form-control input-md" required="" type="text">
-    
+    <select id="book_language" name="language" class="form-control" [(ngModel)]="this.book.language" required>
+      <option *ngFor="let x of this.languages">{{x}}</option>
+      <option>Other</option>
+    </select>
+
+    <input *ngIf="this.book.language=='Other'" [(ngModel)]="this.language_other" id="book_language" name="language_other" class="form-control input-md" required="" type="text" style="margin-top: 10px;">
   </div>
+  
 </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="comment">COMMENT</label>  
-  <div class="col-md-4 input-box">
-  <input id="comment" name="comment" placeholder="COMMENT" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="approuved_by">APPROUVED BY</label>  
-  <div class="col-md-4 input-box">
-  <input id="approuved_by" name="approuved_by" placeholder="APPROUVED BY" class="form-control input-md" required="" type="text">
-  </div>
-  </div>
-    
- <!-- File Button --> 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="filebutton">main_image</label>
-  <div class="col-md-4 input-box">
-    <input id="filebutton" name="filebutton" class="input-file" type="file">
-  </div>
-</div>
-<!-- File Button --> 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="filebutton">auxiliary_images</label>
-  <div class="col-md-4 input-box">
-    <input id="filebutton" name="filebutton" class="input-file" type="file">
-  </div>
-</div>
+
 
 <!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
-  <div class="col-md-4 input-box">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+<div class="form-group" id="submit-wrapper">
+  <input id="btn_reset" name="btn_reset" class="btn btn-warning" value="Reset" type="reset">
+  <div class="col-md-2 input-box" style="margin-left: 15px;">
+    <input id="btn_submit" name="btn_submit" class="btn btn-primary" value="Add Book" type="submit">
   </div>
   </div>
 
 </fieldset>
 </form>
+</div>

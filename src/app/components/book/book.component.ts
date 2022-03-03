@@ -28,11 +28,11 @@ export class BookComponent implements OnInit {
     this.router.navigate(['/books/'+this.book.id], {state: {data: this.book}});
   }
 
-  emitForDelete(book:Book){
+  emitForDelete(){
     if(confirm("Click OK to delete")){
       console.log("emitForDelete is called.");
-      console.log(book);
-      this.deleteEvent.emit(book);
+      console.log(this.book);
+      this.deleteEvent.emit(this.book);
     }
     
   }
