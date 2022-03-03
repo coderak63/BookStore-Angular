@@ -32,6 +32,11 @@ export class HttpService {
     let uri = '/api/delete-book/'+book.id;
     return this.httpClient.delete(uri);
   }
+
+  editBookItem(book,bookItemsJson) {
+    let uri = '/api/edit-book/'+book.id;
+    return this.httpClient.patch(uri,bookItemsJson);
+  }
   
 
 }

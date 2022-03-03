@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   allFetchedBooks:Book[];
   allBooks:Book[];
 
+
+
   ngOnInit() {
     this.httpService.fetchAllBooks().subscribe(
       (data) => {
