@@ -12,7 +12,7 @@
                     <img [hidden]="loadingImage" (load)="onImageLoad()" src="data:image/jpg;base64,{{imageModel.image.data}}" />
 
                         
-                    <i *ngIf="!loadingImage" class="fa fa-pencil fa-sm" id="image_edit_icon" (click)="updateImage()"></i>
+                    <i *ngIf="!loadingImage || imageLoadError" class="fa fa-pencil fa-sm" id="image_edit_icon" (click)="updateImage()"></i>
                     
                 </div>
             </div>
