@@ -1,6 +1,6 @@
 
 <div>
-<form #myForm="ngForm" class="form-horizontal" (submit)="addBook()" ngNativeValidate>
+<form #myForm="ngForm" class="form-horizontal" (submit)="addBook()" ngNativeValidate enctype="multipart/form-data">
 <fieldset>
 
 <!-- Form Name -->
@@ -9,6 +9,8 @@
     <u>Add New Book</u>
   </p>
 </legend>
+
+
 
 
 
@@ -111,6 +113,16 @@
 </div>
 
 
+<!-- File input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="book_image">BOOK IMAGE</label>  
+  <div class="col-md-4 input-box">
+  <input id="book_image" name="image" class="form-control input-md" required="" type="file" accept="image/*" (change)="onFileInputChange($event)">
+    
+  </div>
+</div>
+
+
 
 
 <!-- Button -->
@@ -124,3 +136,5 @@
 </fieldset>
 </form>
 </div>
+
+

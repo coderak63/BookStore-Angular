@@ -24,7 +24,8 @@ export class BookViewComponent implements OnInit {
     "language":false,
     "price":false,
     "category":false,
-    "page_count":false
+    "page_count":false,
+    "image_url":false
   }
 
   languages = Languages.languages;
@@ -34,7 +35,21 @@ export class BookViewComponent implements OnInit {
   modal_category_other:string="";
   authors:string="";
 
+  imageModel:any={
+    image:{
+      data:null
+    }
+  }
+
+  loadingImage: boolean = true
+  onImageLoad() {
+    this.loadingImage = false;
+  }
+  imageLoadError: boolean = false
+
   constructor(private httpService:HttpService, private router:Router) { }
+
+
 
   ngOnInit() {
     let url=this.router.url;
@@ -44,12 +59,28 @@ export class BookViewComponent implements OnInit {
           this.book_original=data;
           this.book = Object.assign({}, this.book_original);
           console.log(data);
+
+          //Fetch image
+          this.httpService.getImageByBookId(this.book.id).subscribe(
+            imageData => {
+              this.imageModel=imageData;
+              console.log(this.imageModel);
+            },
+            imageError => {
+              console.log(imageError);
+              this.imageLoadError=true;
+            }
+          );
+
+
       },
       error => {
         console.log(error);
         this.router.navigate(['/error'], { state: { status: error.status, statusText: error.statusText} });
       }
     );
+
+    
   }
 
   hideModal(basicModal){
@@ -62,6 +93,7 @@ export class BookViewComponent implements OnInit {
     this.edit_clicked.price=false;
     this.edit_clicked.category=false;
     this.edit_clicked.page_count=false;
+    this.edit_clicked.image_url=false;
 
     basicModal.hide();
   }
@@ -153,6 +185,32 @@ export class BookViewComponent implements OnInit {
       }
     );
     
+  }
+
+
+  updateImage(){
+    let input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = _ => {
+            //use this method to get file and perform respective operations
+            let files =   Array.from(input.files);
+            console.log(files[0]);
+
+            this.loadingImage = true
+            this.imageLoadError=false
+            this.httpService.updateImage(files[0],this.book.id,this.book.title).subscribe(
+              imageData => {
+                  console.log(imageData);
+                  this.imageModel=imageData;
+              },
+              imageError => {
+                  console.log(imageError);
+                  this.imageLoadError=true
+              }
+            )
+
+        };
+  input.click();
   }
 
 

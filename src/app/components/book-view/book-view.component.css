@@ -70,3 +70,26 @@ hr {
     color: red;
     cursor: pointer;
 }
+
+
+
+
+
+#image_edit_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: .3s ease;
+  }
+  
+  .demo:hover  #image_edit_icon {
+    opacity: 1;
+  }
+  
+  
+  /* When you move the mouse over the icon, change color */
+  #image_edit_icon:hover {
+    color: red;
+    cursor: pointer;
+  }

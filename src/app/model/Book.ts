@@ -11,7 +11,7 @@ export class Book{
 	price:number;
 	category:string;
 	page_count:number;
-    date_created:string;
+	date_created:string;
 
 	constructor() { }
 

@@ -17,6 +17,7 @@ export class AddNewBookComponent implements OnInit {
   
 
   book:Book = new Book();
+  image_file:File;
 
   category_other:string;
   language_other:string;
@@ -24,6 +25,12 @@ export class AddNewBookComponent implements OnInit {
   constructor(private httpService:HttpService) { }
 
   ngOnInit() {
+  }
+
+  onFileInputChange(event){
+    this.image_file=event.target.files[0];
+    console.log(this.image_file);
+    
   }
 
   addBook(){
@@ -54,7 +61,19 @@ export class AddNewBookComponent implements OnInit {
     this.httpService.addBook(this.book).subscribe(
       data => {
         console.log(data);
-        alert("Book added successfully!");
+        console.log("Book Data added successful");
+
+        this.httpService.uploadImage(this.image_file,data.id,data.title).subscribe(
+          imageData=>{
+            console.log(imageData);
+            console.log("Image Upload successful");
+            alert("Book added successfully!");
+          },
+          imageError=>{
+            console.log(imageError);
+          }
+        )
+
       },
       error => {
         console.log(error);

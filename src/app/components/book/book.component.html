@@ -1,6 +1,14 @@
 
 <div class="row p-2 bg-white border rounded">
-    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/11/jaredd-craig-HH4WBGNyltc-unsplash.jpg"></div>
+    <div class="col-md-3 mt-1">
+        <!--
+        <img class="img-fluid img-responsive rounded product-image" src="data:image/png;base64,{{imageModel.image.data}}">
+        -->
+        <img *ngIf="loadingImage && !imageLoadError" src="/assets/loading.gif" alt="loading" class="img-fluid img-responsive rounded product-image"/>
+        <img *ngIf="imageLoadError" src="/assets/image_not_found.jpg" alt="Image not found!" class="img-fluid img-responsive rounded product-image"/>
+        <img [hidden]="loadingImage" (load)="onImageLoad()" class="img-fluid img-responsive rounded product-image" src="data:image/jpg;base64,{{imageModel.image.data}}" />
+    </div>
+
     <div class="col-md-6 mt-1">
         <h5>{{book.title}}</h5>
         <div class="d-flex flex-row">

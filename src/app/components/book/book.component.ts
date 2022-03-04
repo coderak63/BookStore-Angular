@@ -17,11 +17,42 @@ export class BookComponent implements OnInit {
   @Output() deleteEvent:EventEmitter<Book> = new EventEmitter();
   //@Output() updateEvent:EventEmitter<Book> = new EventEmitter();
 
+
+  imageModel:any={
+    image:{
+      data:null
+    }
+  }
+
+  loadingImage: boolean = true
+  onImageLoad() {
+    this.loadingImage = false;
+  }
+  imageLoadError: boolean = false
   
 
   constructor(private httpService:HttpService, private router:Router) { }
 
   ngOnInit() {
+    
+    //Fetch image
+    this.fetchImage();
+    
+  }
+
+  fetchImage(){
+
+    this.httpService.getImageByBookId(this.book.id).subscribe(
+      imageData => {
+        this.imageModel=imageData;
+        console.log(this.imageModel);
+      },
+      imageError => {
+        console.log(imageError);
+        this.imageLoadError=true;
+      }
+    );
+
   }
 
   openBookDetails(){

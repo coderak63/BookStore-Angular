@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LayoutComponent } from './components/layout/layout.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     HomeComponent,
     BookViewComponent,
     PageNotFoundComponent,
-    LayoutComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
