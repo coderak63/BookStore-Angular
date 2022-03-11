@@ -86,7 +86,6 @@ export class UserBookRatingsComponent implements OnInit {
         this.my_rating=data;
         console.log("My rating");
         console.log(this.my_rating);
-        this.fillModalStars(this.my_rating.rating);
         
       },
       error => {
@@ -127,20 +126,7 @@ export class UserBookRatingsComponent implements OnInit {
   }
 
 
-  fillModalStars(rating){
-    
-    let r=Math.floor(rating);
-    let i=1;
-    for(;i<=r;i++)
-    {
-      let id="modal_rating_"+i;
-      document.getElementById(id).style.opacity="1"
-    }
 
-    
-
-
-  }
 
 
   hideModal(basicModal){
