@@ -55,4 +55,9 @@ export class UserHomeComponent implements OnInit {
     this.allBooks=allBooks_temp;
   }
 
+
+  onCrossClick(){
+    this.allBooks=this.allFetchedBooks;
+  }
+
 }
