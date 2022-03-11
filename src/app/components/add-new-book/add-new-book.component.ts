@@ -63,16 +63,22 @@ export class AddNewBookComponent implements OnInit {
         console.log(data);
         console.log("Book Data added successful");
 
-        this.httpService.uploadImage(this.image_file,data.id,data.title).subscribe(
-          imageData=>{
-            console.log(imageData);
-            console.log("Image Upload successful");
-            alert("Book added successfully!");
-          },
-          imageError=>{
-            console.log(imageError);
-          }
-        )
+        if(this.image_file!=null){
+
+            this.httpService.uploadImage(this.image_file,data.id,data.title).subscribe(
+              imageData=>{
+                console.log(imageData);
+                console.log("Image Upload successful");
+                alert("Book added successfully!");
+              },
+              imageError=>{
+                console.log(imageError);
+              }
+            )
+
+        }else{
+          alert("Book added successfully!");
+        }
 
       },
       error => {

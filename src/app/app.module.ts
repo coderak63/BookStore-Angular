@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,15 @@ import { FormsModule } from '@angular/forms';
 import { BookViewComponent } from './components/book-view/book-view.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { LoginComponent } from './security/components/login/login.component';
+import { LogoutComponent } from './security/components/logout/logout.component';
+import { SignupComponent } from './security/components/signup/signup.component';
+import { UserHomeComponent } from './user/components/user-home/user-home.component';
+import { AuthHttpInterceptorService } from './security/services/auth-http-interceptor.service';
+import { UserLayoutComponent } from './user/components/user-layout/user-layout.component';
+import { UserBookComponent } from './user/components/user-book/user-book.component';
+import { UserBookViewComponent } from './user/components/user-book-view/user-book-view.component';
+import { UserBookRatingsComponent } from './user/components/user-book-ratings/user-book-ratings.component';
 
 
 
@@ -27,7 +36,15 @@ import { LayoutComponent } from './components/layout/layout.component';
     HomeComponent,
     BookViewComponent,
     PageNotFoundComponent,
-    LayoutComponent
+    LayoutComponent,
+    LoginComponent,
+    LogoutComponent,
+    SignupComponent,
+    UserHomeComponent,
+    UserLayoutComponent,
+    UserBookComponent,
+    UserBookViewComponent,
+    UserBookRatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +53,9 @@ import { LayoutComponent } from './components/layout/layout.component';
     FormsModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

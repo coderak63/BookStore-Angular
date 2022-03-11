@@ -19,6 +19,10 @@ export class PageNotFoundComponent implements OnInit {
 
       if(this.status=="404")
       this.statusText="Page Not Found!";
+      else if(this.status=="401")
+      {
+        this.router.navigate(['logout']);
+      }
       else
       this.statusText=this.router.getCurrentNavigation().extras.state.statusText;
     }

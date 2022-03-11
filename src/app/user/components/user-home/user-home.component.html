@@ -1,0 +1,46 @@
+
+
+<div>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <div class="navbar-brand"></div>
+        <form class="form-inline" #searchForm="ngForm">
+          <input class="form-control mr-sm-2" type="search" name="searchBox" placeholder="Search" aria-label="Search" ngModel>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchFilter(searchForm)">Search</button>
+        </form>
+      </nav>
+</div>
+
+<!--
+<div>
+    
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          
+      </div>
+    </div>
+
+</div>
+
+-->
+
+
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="card-columns">
+     
+    <div *ngIf="this.allBooks.length>0; else no_content">
+      <div *ngFor="let x of this.allBooks">
+        <app-user-book  [book]="x"></app-user-book>
+        </div>
+    </div>
+
+  </div>
+
+  </div>
+</div>
+
+<ng-template #no_content>
+  No Books Available !
+</ng-template>

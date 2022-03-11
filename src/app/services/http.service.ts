@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from '../model/Book';
+import { Rating } from '../user/model/Rating';
 
 @Injectable({
   providedIn: 'root'
@@ -21,21 +22,21 @@ export class HttpService {
   }
 
   addBook(book: Book){
-    return this.httpClient.post<Book>('/api/add-book',book);
+    return this.httpClient.post<Book>('/api/books',book);
   }
 
   editBook(book: Book) {
-    let uri = '/api/edit-book/'+book.id;
+    let uri = '/api/books/'+book.id;
     return this.httpClient.put(uri,book);
   }
 
   deleteBook(book: Book) {
-    let uri = '/api/delete-book/'+book.id;
+    let uri = '/api/books/'+book.id;
     return this.httpClient.delete(uri);
   }
 
   editBookItem(book,bookItemsJson) {
-    let uri = '/api/edit-book/'+book.id;
+    let uri = '/api/books/'+book.id;
     return this.httpClient.patch(uri,bookItemsJson);
   }
 
@@ -48,7 +49,7 @@ export class HttpService {
     formData.append("book_id", book_id);
     formData.append("title", title);
 
-    return this.httpClient.post<Book>('/api/upload-photo',formData);
+    return this.httpClient.post<Book>('/api/photos',formData);
   }
 
   updateImage(image_file:File,book_id:string,title:string){
@@ -60,12 +61,29 @@ export class HttpService {
     formData.append("book_id", book_id);
     formData.append("title", title);
 
-    return this.httpClient.put<Book>('/api/update-photo',formData);
+    return this.httpClient.put<Book>('/api/photos',formData);
   }
 
   getImageByBookId(book_id:string){
-    return this.httpClient.get<Observable<any>>('/api/photos/by-book-id/'+book_id);
+    return this.httpClient.get<Observable<any>>('/api/photos/book-id/'+book_id);
   }
   
+
+  getAverageRatingByBookId(book_id:string){
+    return this.httpClient.get<Observable<any>>('/api/ratings/average/'+book_id);
+  }
+
+  getMyRatingByBookId(book_id:string){
+    let username= sessionStorage.getItem('username');
+    return this.httpClient.get<Rating>('/api/ratings/username/'+username+'/'+book_id);
+  }
+
+  getAllRatingByBookId(book_id:string){
+    return this.httpClient.get<Rating[]>('/api/ratings/'+book_id);
+  }
+
+  postMyRatingByBookId(rating:Rating){
+    return this.httpClient.post<Rating>('/api/ratings',rating);
+  }
 
 }

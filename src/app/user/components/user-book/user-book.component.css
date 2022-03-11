@@ -1,0 +1,119 @@
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 330px;
+    /* height: 80vh; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+
+.image-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.thumbnail-image {
+    border-radius: 10px !important;
+
+}
+
+
+
+
+
+.book-name {
+    font-size: 14px;
+    font-weight: bold;
+    width: 75%
+}
+
+.new-price {
+    font-size: 13px;
+    font-weight: bold;
+    color: red
+}
+
+.old-price {
+    font-size: 8px;
+    font-weight: bold;
+    color: grey
+}
+
+.btn {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    padding: 3px
+}
+
+.creme {
+    background-color: #fff;
+    border: 2px solid grey
+}
+
+.creme:hover {
+    border: 3px solid grey
+}
+
+.creme:focus {
+    background-color: grey
+}
+
+
+
+.item-size {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid grey;
+    color: grey;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center
+}
+
+.rating-star {
+    font-size: 10px !important
+}
+
+.rating-number {
+    font-size: 12px;
+    font-weight: 500;
+    color: green;
+}
+
+.buy {
+    font-size: 12px;
+    color: white;
+    font-weight: 500
+}
+
+
+
+.discount-percent {
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    top: 5px
+}
+
+.off {
+    font-size: 14px;
+    position: relative;
+    bottom: 5px
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    
+}
+
+.details {
+    font-size: 12px;
+    font-weight: 500;
+}

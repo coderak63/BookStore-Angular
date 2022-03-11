@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Book } from 'src/app/model/Book';
 import { HttpService } from 'src/app/services/http.service';
-import { ModalDirective } from 'angular-bootstrap-md';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BookComponent implements OnInit {
 
-  @ViewChild('frame') public popup_frame: ModalDirective;
+ 
 
   @Input() book:Book;
   @Output() deleteEvent:EventEmitter<Book> = new EventEmitter();
@@ -56,7 +55,7 @@ export class BookComponent implements OnInit {
   }
 
   openBookDetails(){
-    this.router.navigate(['/books/'+this.book.id], {state: {data: this.book}});
+    this.router.navigate(['/admin/books/'+this.book.id], {state: {data: this.book}});
   }
 
   emitForDelete(){
@@ -72,26 +71,5 @@ export class BookComponent implements OnInit {
 
   
 
-  updateBook(title,description,due_date,frame){
-
-      /*
-    this.book.title=title.value;
-    this.todo.description=description.value;
-    this.todo.date_due=due_date.value;
-    */
-
-    this.httpService.editBook(this.book).subscribe(
-      (data) => {
-        console.log(data);
-        frame.hide();
-      },
-
-      (error) => {
-        console.log(error);
-        frame.hide();
-        alert("Some error occured");
-      }
-    )
-  }
 
 }
